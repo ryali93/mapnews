@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="47cab77a-643d-445d-bc12-a5ba2db244ed" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mushrooms/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/mapnews/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mushrooms/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/mapnews/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mushrooms/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/mapnews/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mushrooms/migrations/0002_auto_20190920_2210.py" beforeDir="false" afterPath="$PROJECT_DIR$/mapnews/migrations/0002_auto_20190920_2210.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mushrooms/migrations/0003_auto_20190920_2228.py" beforeDir="false" afterPath="$PROJECT_DIR$/mapnews/migrations/0003_auto_20190920_2228.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mushrooms/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/mapnews/migrations/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mushrooms/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mapnews/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mushrooms/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/mapnews/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mushrooms/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/mapnews/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mushrooms/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mapnews/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mushrooms/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/mapnews/wsgi.py" afterDir="false" />
-    </list>
+    <list default="true" id="47cab77a-643d-445d-bc12-a5ba2db244ed" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,16 +19,18 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="bat" value="1" />
           <entry key="html" value="1" />
           <entry key="png" value="3" />
-          <entry key="py" value="9" />
+          <entry key="py" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="HTML" value="1" />
           <entry key="Image" value="3" />
-          <entry key="Python" value="9" />
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="Python" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -73,8 +60,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mapnews/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="30" column="24" lean-forward="true" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
+            <state relative-caret-position="205">
+              <caret line="31" selection-start-line="31" selection-end-line="31" />
             </state>
           </provider>
         </entry>
@@ -326,10 +313,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../setup.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../docs/make.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../docs/conf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="145" column="19" lean-forward="true" selection-start-line="145" selection-start-column="19" selection-end-line="145" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mapnews/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="30" column="24" lean-forward="true" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
+        <state relative-caret-position="205">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
         </state>
       </provider>
     </entry>
