@@ -1,15 +1,13 @@
-# from djgeojson.fields import PolygonField
+from djgeojson.fields import PolygonField
 from django.db import models
-from django.contrib.gis.db import models as geomodels
 
 
-class NewsHotspot(models.Model):
+class MapnewsHotspot(models.Model):
 
     title = models.CharField(max_length=256)
     description = models.TextField()
     picture = models.ImageField()
-    # geom = PolygonField()
-    geom = geomodels.PointField()
+    geom = PolygonField()
 
     def __unicode__(self):
         return self.title

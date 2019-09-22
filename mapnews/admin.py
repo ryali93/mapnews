@@ -1,7 +1,7 @@
 from leaflet.admin import LeafletGeoAdmin
 from django.contrib import admin
 
-from . import models as newshotspot_models
+from . import models as mapnews_models
 
 
-admin.site.register(newshotspot_models.NewsHotspot, LeafletGeoAdmin)
+admin.site.register(mapnews_models.MapnewsHotspot, LeafletGeoAdmin)
