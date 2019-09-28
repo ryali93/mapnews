@@ -1,17 +1,20 @@
-from djgeojson.fields import PolygonField
+from djgeojson.fields import PointField
 from django.db import models
 
 
 class MapnewsHotspot(models.Model):
 
     title = models.CharField(max_length=256)
-    description = models.TextField()
-    picture = models.ImageField()
-    geom = PolygonField()
+    description = models.TextField(max_length=3000)
+    # picture = models.ImageField()
+    geom = PointField()
 
     def __unicode__(self):
         return self.title
 
-    @property
-    def picture_url(self):
-        return self.picture.url
+    def __str__(self):
+        return 'News: {}'.format(self.title)
+
+        # @property
+    # def picture_url(self):
+    #     return self.picture.url
