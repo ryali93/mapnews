@@ -7,49 +7,59 @@
     <style>
       .leaflet-container { height: 100%; }
     </style>
+  
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-      <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css" />
-    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css" />
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.Default.css" />
+
+
+    <script src="{% static 'dist/leaflet.markercluster-src.js' %}"></script>
+
 
     <script type="text/javascript">
         var dataurl = '{% url "data" %}';
 
+  
         window.addEventListener("map:init", function (event) {
-          var map = event.detail.map;
 
-          j = fetch(dataurl).then(function(resp){ return resp.json()});
-          console.log(j);
+        var map = event.detail.map;
 
-          // Download GeoJSON data with Ajax
-          fetch(dataurl)
-            .then(function(resp) {
-              return resp.json();
-            })
-            .then(function(data) {
 
-              var geoJsonLayer = L.geoJson(data, {
-                onEachFeature: function onEachFeature(feature, layer) {
-                  var props = feature.properties;
-                  var content = `<h3>${props.title}</h3><p>${props.description}</p>`;
-                  <!--var content = `<img width="300" src="${props.picture_url}"/><h3>${props.title}</h3><p>${props.description}</p>`;-->
-                  layer.bindPopup(content);
-              }});
+        var cluster = new L.MarkerClusterGroup();
 
-              map.addLayer(geoJsonLayer);
+        // Download GeoJSON data with Ajax
+        fetch(dataurl)
+          .then(function(resp) {
+                return resp.json();
+                })
+          .then(function(data)
+                {
 
-              var markerClusters = L.markerClusterGroup();
-              markerClusters.addLayer( geoJsonLayer );
+                L.geoJson(data, {
+                onEachFeature: function onEachFeature(feature, layer)
+                      {
+                      var props = feature.properties;
+                      var content = `<h3>${props.title}</h3><p>${props.description}</p>`;
+                      layer.bindPopup(content);
+                      }
+                                }).addTo(cluster);
+              
+                });
 
-            });
-            map.addLayer( markerClusters );
+        
+        // console.log(cluster);
+        map.addLayer(cluster);
 
-        });
+      });
     </script>
   </head>
   <body>
