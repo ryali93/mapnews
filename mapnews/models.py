@@ -7,6 +7,7 @@ class MapnewsHotspot(models.Model):
     title = models.CharField(max_length=256)
     description = models.TextField(max_length=3000)
     # picture = models.ImageField()
+    dia = models.IntegerField(null=True)
     geom = PointField()
 
     def __unicode__(self):
