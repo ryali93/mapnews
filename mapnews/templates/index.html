@@ -146,7 +146,8 @@
       document.getElementById('input-number-max').setAttribute("value", 5);
 
       // conectando los inputbox con el slider:
-      //
+            
+
       var inputNumberMin = document.getElementById('input-number-min');
       var inputNumberMax = document.getElementById('input-number-max');
       inputNumberMin.addEventListener('change', function(){
@@ -156,9 +157,14 @@
           slidervar.noUiSlider.set([null, this.value]);
       });
 
+      console.log(1);
+
       // ahora conectamos el slider con el inputbox:
       //
       slidervar.noUiSlider.on('update', function( values, handle ) {
+        console.log("handle");
+        console.log(handle);
+        console.log("fin handle");
       //handle = 0 if min-slider is moved and handle = 1 if max slider is moved
       if (handle==0){
           document.getElementById('input-number-min').value = values[0];
@@ -166,9 +172,6 @@
           document.getElementById('input-number-max').value =  values[1];
       }
       //we will definitely do more here...wait
-      })
-
-
       rangeMin = document.getElementById('input-number-min').value;
       rangeMax = document.getElementById('input-number-max').value;
 
@@ -176,6 +179,7 @@
       //first let's clear the layer:
       cluster.clearLayers();
       //and repopulate it
+      console.log("se limpio");
 
       fetch(dataurl)
           .then(function(resp) {
@@ -191,16 +195,21 @@
                       var content = `<h3>${props.title}</h3><p>${props.description}</p>`;
                       layer.bindPopup(content);
                       console.log(feature.properties);
+                      console.log(rangeMin);
+                      },
+                filter:
+                      function(feature,layer){
+                            return (feature.properties.dia <= rangeMax) && (feature.properties.dia >= rangeMin);
                       }
-                // filter:
-                //       function(feature,layer){
-                //             return (feature.properties.dia <= rangeMax) && (feature.properties.dia >= rangeMin);
-                //       }
 
 
                                 }).addTo(cluster);
               
                 });
+      })
+
+
+
           // console.log(cluster);
 
 
