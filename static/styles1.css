@@ -1,0 +1,46 @@
+body{
+    display: flex;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #f8f9fa;
+}
+
+#logoGeocodery{
+    width: auto;
+    height:30px;
+}
+
+.container-fluid{
+    padding-top: 60px;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+#map{
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.right {
+  height: 100vh;
+  width: 10%;
+  background-color: red;
+  float: right;
+}
+
+.navbar {
+  height: 60px;
+  background-color: #1c5ea5!important;
+}
+
+.page-footer {
+  background-color: #1c5ea5!important;
+  height: 30px;
+}
+
+.row {
+    margin-right: 0px!important;
+}

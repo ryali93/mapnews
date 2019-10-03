@@ -1,0 +1,230 @@
+{% load static %}
+{% load leaflet_tags %}
+<html>
+<head>
+    {% leaflet_js %}
+    {% leaflet_css %}
+    <style>
+      .leaflet-container { height: 100%; }
+    </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'styles1.css' %}">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style type="text/css">html,
+        body {
+            height: 100%;
+            display: flex;
+            background-color: #657280;
+        }
+        .flex-fill {
+            flex: 1 1 auto;
+        }
+
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css"/>
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.Default.css"/>
+
+    <script src="{% static 'dist/leaflet.markercluster-src.js' %}"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.5.1/nouislider.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.5.1/nouislider.min.js"></script>
+
+    <!--Search div-->
+    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
+    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
+
+
+
+    <script type="text/javascript">
+        var dataurl = '{% url "data" %}';
+
+  
+        window.addEventListener("map:init", function (event) {
+
+        var map = event.detail.map;
+
+        var searchControl = new L.esri.Controls.Geosearch().addTo(map);
+
+        var results = new L.LayerGroup().addTo(map);
+
+        // searchControl.on('results', function(data){
+        //     results.clearLayers();
+        //     for (var i = data.results.length - 1; i >= 0; i--) {
+        //       results.addLayer(L.marker(data.results[i].latlng));
+        //     }
+        // });
+
+
+        // var cluster = new L.MarkerClusterGroup();
+
+        // Download GeoJSON data with Ajax
+        // fetch(dataurl)
+        //   .then(function(resp) {
+        //         return resp.json();
+        //         })
+        //   .then(function(data)
+        //         {
+
+        //         L.geoJson(data, {
+        //         onEachFeature: function onEachFeature(feature, layer)
+        //               {
+        //               var props = feature.properties;
+        //               var content = `<h3>${props.title}</h3><p>${props.description}</p>`;
+        //               layer.bindPopup(content);
+        //               }
+        //                         }).addTo(cluster);
+        //         });
+
+        // console.log(cluster);
+        map.addLayer(cluster);
+
+      });
+
+
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" style="background-color: #1c5ea5!important">
+        <a class="navbar-brand" href="#">
+            <img id="logoGeocodery" src="https://geocodery.github.io/page/img/logo-icon.png">Geocodery
+        </a>
+        <!--<a class="brand-logo center">MAP NEWS</a>-->
+        <h2 class="entry-title" style="text-align: center; width: 70%;color:white;" itemprop="headline"><a rel="bookmark">Map News</a></h2>
+        <div class="navbar-toggler">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+            <ul class="navbar-nav ">
+                <li class="nav-item dropdown text-center">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Menu
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" data-toggle="modal" href="#realTimeModal">Menu</a>
+                        <a class="dropdown-item" data-toggle="modal" href="#">Analysis</a>
+                        <a class="dropdown-item" data-toggle="modal" href="#">About</a>
+                        <div class="dropdown-divider"></div>
+                        <a id="stop_tracking" class="dropdown-item" href="#">Stop Tracking</a>
+                        <a id="clear_grids" class="dropdown-item" href="#">Clear Grids</a>
+                    </div>
+                </li>
+                <a class="flex-fill text-center text-light nav-link" data-toggle="collapse" href="#" data-target=".chat" id="chatToggle">Analysis</a>
+                <a class="flex-fill text-center text-light nav-link" href="https://github.com/geocodery">About</a>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid d-flex flex-column">
+        <div id="map">
+            {% leaflet_map "main" %}
+        </div>
+
+        <div id="slider" style="top: 0px; right: 1px; margin: 10px 25px;"></div>
+        <div style="margin-right: auto; margin-left: auto; width: 90%; margin-bottom: 10px; text-align: center;">
+            <input type="number" min='1' max='99' id="input-number-min">
+            <input type="number" min='2' max='100' id="input-number-max">
+        </div>
+
+        <div class="chat collapse">
+            <div class="row" id="chatFooter">
+                <div class="col-sm-2 border">
+                    <h4 class="chatLabel">Map News</h4>
+                </div>
+                <div class="col-sm border">
+                    <textarea readonly="" class="chatMsgTxt form-control" id="chatMsgTxt" style="border: 1px black;">Noticias del dia</textarea>
+                </div>
+            </div>
+        </div>
+
+        <footer class="page-footer font-small">
+          <div class="footer-copyright text-center">© 2018 Copyright</div>
+        </footer>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+      var slidervar = document.getElementById('slider');
+        noUiSlider.create(slidervar, {
+            connect: true,
+            start: [ 1, 10 ],
+            range: {
+                min: 1,
+                max: 10
+            }
+        });
+      document.getElementById('input-number-min').setAttribute("value", 1);
+      document.getElementById('input-number-max').setAttribute("value", 5);
+      // conectando los inputbox con el slider:
+
+      var inputNumberMin = document.getElementById('input-number-min');
+      var inputNumberMax = document.getElementById('input-number-max');
+      inputNumberMin.addEventListener('change', function(){
+          slidervar.noUiSlider.set([this.value, null]);
+      });
+      inputNumberMax.addEventListener('change', function(){
+          slidervar.noUiSlider.set([null, this.value]);
+      });
+      console.log(1);
+      // ahora conectamos el slider con el inputbox:
+      //
+      slidervar.noUiSlider.on('update', function( values, handle ) {
+        console.log("handle");
+        console.log(handle);
+        console.log("fin handle");
+      //handle = 0 if min-slider is moved and handle = 1 if max slider is moved
+      if (handle==0){
+          document.getElementById('input-number-min').value = values[0];
+      } else {
+          document.getElementById('input-number-max').value =  values[1];
+      }
+      //we will definitely do more here...wait
+      rangeMin = document.getElementById('input-number-min').value;
+      rangeMax = document.getElementById('input-number-max').value;
+      //first let's clear the layer:
+      cluster.clearLayers();
+      //and repopulate it
+      console.log("se limpio");
+      fetch(dataurl)
+          .then(function(resp) {
+                return resp.json();
+                })
+          .then(function(data)
+                {
+
+                L.geoJson(data, {
+                onEachFeature: function onEachFeature(feature, layer)
+                      {
+                      var props = feature.properties;
+                      var content = `<h3>${props.title}</h3><p>${props.description}</p>`;
+                      layer.bindPopup(content);
+                      console.log(feature.properties);
+                      console.log(rangeMin);
+                      },
+                filter:
+                      function(feature,layer){
+                            return (feature.properties.dia <= rangeMax) && (feature.properties.dia >= rangeMin);
+                      }
+                                }).addTo(cluster);
+
+                });
+      })
+          // console.log(cluster);
+    </script>
+
+
+
+</body>
+</html>
