@@ -22,6 +22,27 @@
         .flex-fill {
             flex: 1 1 auto;
         }
+     
+          h2 {
+              font-family: bookman;
+              }
+
+          nav, .footer-copyright.text-center {
+                animation: colorchange 20s; /* animation-name followed by duration in seconds*/
+                   /* you could also use milliseconds (ms) or something like 2.5s */
+                -webkit-animation: colorchange 20s; /* Chrome and Safari */
+                animation-iteration-count:infinite;
+              }
+
+              @keyframes colorchange
+              {
+                0%   {background: #657280;}
+                /*25%  {background: #74a9cf;}*/
+                50%  {background: #018571;}
+                /*75%  {background: #018571;}*/
+                100% {background: #657280;}
+              }
+        
 
     </style>
 
@@ -55,12 +76,12 @@
 
         var results = new L.LayerGroup().addTo(map);
 
-        // searchControl.on('results', function(data){
-        //     results.clearLayers();
-        //     for (var i = data.results.length - 1; i >= 0; i--) {
-        //       results.addLayer(L.marker(data.results[i].latlng));
-        //     }
-        // });
+        searchControl.on('results', function(data){
+            results.clearLayers();
+            for (var i = data.results.length - 1; i >= 0; i--) {
+              results.addLayer(L.circleMarker(data.results[i].latlng, {color: '#B5281A' }));
+            }
+        });
 
 
         // var cluster = new L.MarkerClusterGroup();
@@ -99,7 +120,8 @@
             <img id="logoGeocodery" src="https://geocodery.github.io/page/img/logo-icon.png">Geocodery
         </a>
         <!--<a class="brand-logo center">MAP NEWS</a>-->
-        <h2 class="entry-title" style="text-align: center; width: 70%;color:white;" itemprop="headline"><a rel="bookmark">Map News</a></h2>
+        
+        <h2 class="animated bounce infinite" style="text-align: center; width: 70%;color:white;" itemprop="headline"><a rel="bookmark">MAP NEWS</a></h2>
         <div class="navbar-toggler">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
                     aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -152,7 +174,7 @@
         </div>
 
         <footer class="page-footer font-small">
-          <div class="footer-copyright text-center">© 2018 Copyright</div>
+          <div class="footer-copyright text-center">© 2019 Copyright</div>
         </footer>
     </div>
 
