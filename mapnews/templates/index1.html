@@ -41,7 +41,10 @@
 
 
     <script type="text/javascript">
+
+
         var dataurl = '{% url "data" %}';
+        var cluster = new L.MarkerClusterGroup();
 
   
         window.addEventListener("map:init", function (event) {
@@ -62,6 +65,7 @@
 
         // var cluster = new L.MarkerClusterGroup();
 
+
         // Download GeoJSON data with Ajax
         // fetch(dataurl)
         //   .then(function(resp) {
@@ -78,6 +82,7 @@
         //               layer.bindPopup(content);
         //               }
         //                         }).addTo(cluster);
+
         //         });
 
         // console.log(cluster);
@@ -129,10 +134,10 @@
             {% leaflet_map "main" %}
         </div>
 
-        <div id="slider" style="top: 0px; right: 1px; margin: 10px 25px;"></div>
+        <div id="slider" style="top: 0px; right: 1px; margin: 10px 25px;" ></div>
         <div style="margin-right: auto; margin-left: auto; width: 90%; margin-bottom: 10px; text-align: center;">
-            <input type="number" min='1' max='99' id="input-number-min">
-            <input type="number" min='2' max='100' id="input-number-max">
+            <input type="number" min='1' max='9' id="input-number-min" step= "1" value="1">
+            <input type="number" min='2' max='10' id="input-number-max" step= "1" value ="10">
         </div>
 
         <div class="chat collapse">
@@ -160,43 +165,20 @@
         noUiSlider.create(slidervar, {
             connect: true,
             start: [ 1, 10 ],
+            step : 1,
             range: {
                 min: 1,
                 max: 10
             }
         });
-      document.getElementById('input-number-min').setAttribute("value", 1);
-      document.getElementById('input-number-max').setAttribute("value", 5);
-      // conectando los inputbox con el slider:
 
-      var inputNumberMin = document.getElementById('input-number-min');
-      var inputNumberMax = document.getElementById('input-number-max');
-      inputNumberMin.addEventListener('change', function(){
-          slidervar.noUiSlider.set([this.value, null]);
-      });
-      inputNumberMax.addEventListener('change', function(){
-          slidervar.noUiSlider.set([null, this.value]);
-      });
-      console.log(1);
-      // ahora conectamos el slider con el inputbox:
-      //
-      slidervar.noUiSlider.on('update', function( values, handle ) {
-        console.log("handle");
-        console.log(handle);
-        console.log("fin handle");
-      //handle = 0 if min-slider is moved and handle = 1 if max slider is moved
-      if (handle==0){
-          document.getElementById('input-number-min').value = values[0];
-      } else {
-          document.getElementById('input-number-max').value =  values[1];
-      }
-      //we will definitely do more here...wait
-      rangeMin = document.getElementById('input-number-min').value;
-      rangeMax = document.getElementById('input-number-max').value;
-      //first let's clear the layer:
-      cluster.clearLayers();
-      //and repopulate it
-      console.log("se limpio");
+    document.getElementById('input-number-min').setAttribute("value", 1);
+    document.getElementById('input-number-max').setAttribute("value", 10);
+
+    defaultMin = document.getElementById('input-number-min').value;
+    defaultMax = document.getElementById('input-number-max').value;
+
+// iniciamos el mapa por primera vez
       fetch(dataurl)
           .then(function(resp) {
                 return resp.json();
@@ -210,18 +192,82 @@
                       var props = feature.properties;
                       var content = `<h3>${props.title}</h3><p>${props.description}</p>`;
                       layer.bindPopup(content);
-                      console.log(feature.properties);
-                      console.log(rangeMin);
+                      
+                      },
+                filter:
+                      function(feature,layer){
+                            return (feature.properties.dia <= defaultMax) && (feature.properties.dia >= defaultMin);
+                      }
+                                }).addTo(cluster);
+
+                });
+
+
+
+
+
+
+
+      // document.getElementById('input-number-min').setAttribute("value", 1);
+      // document.getElementById('input-number-max').setAttribute("value", 10);
+
+      // conectando los inputbox con el slider:
+
+
+      var inputNumberMin = document.getElementById('input-number-min');
+      var inputNumberMax = document.getElementById('input-number-max');
+      inputNumberMin.addEventListener('change', function(){
+          slidervar.noUiSlider.set([this.value, null]);
+      });
+      inputNumberMax.addEventListener('change', function(){
+          slidervar.noUiSlider.set([null, this.value]);
+      });
+
+      console.log("previo");
+
+      // ahora conectamos el slider con el inputbox:
+      //
+      slidervar.noUiSlider.on('set', function( values, handle ) {
+
+      //handle = 0 if min-slider is moved and handle = 1 if max slider is moved
+      if (handle==0){
+          document.getElementById('input-number-min').value = values[0];
+      } else {
+          document.getElementById('input-number-max').value =  values[1];
+      }
+      //we will definitely do more here...wait
+      rangeMin = document.getElementById('input-number-min').value;
+      rangeMax = document.getElementById('input-number-max').value;
+
+
+      //limpiamos las capas:
+      cluster.clearLayers();
+      //volvemos a cargar los clusters pero esta vez con los condicionales
+
+      fetch(dataurl)
+          .then(function(resp) {
+                return resp.json();
+                })
+          .then(function(data)
+                {
+
+                L.geoJson(data, {
+                onEachFeature: function onEachFeature(feature, layer)
+                      {
+                      var props = feature.properties;
+                      var content = `<h3>${props.title}</h3><p>${props.description}</p>`;
+                      layer.bindPopup(content);
                       },
                 filter:
                       function(feature,layer){
                             return (feature.properties.dia <= rangeMax) && (feature.properties.dia >= rangeMin);
                       }
+
+
                                 }).addTo(cluster);
 
                 });
       })
-          // console.log(cluster);
     </script>
 
 
