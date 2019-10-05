@@ -75,7 +75,7 @@
 
 
         var dataurl = '{% url "data" %}';
-        var cluster = new L.MarkerClusterGroup();
+        var cluster = new L.MarkerClusterGroup({maxClusterRadius:20});
 
   
         window.addEventListener("map:init", function (event) {
@@ -252,11 +252,12 @@
                       var content = `<h3>${props.title}</h3><p>${props.description}</p>`;
                       layer.bindPopup(content);
                       
-                      },
-                filter:
-                      function(feature,layer){
-                            return (feature.properties.dia <= defaultMax) && (feature.properties.dia >= defaultMin);
                       }
+                      ,
+                // filter:
+                //       function(feature,layer){
+                //             return (feature.properties.dia <= defaultMax) && (feature.properties.dia >= defaultMin);
+                //       }
                                 }).addTo(cluster);
 
                 });
@@ -316,11 +317,12 @@
                       var props = feature.properties;
                       var content = `<h3>${props.title}</h3><p>${props.description}</p>`;
                       layer.bindPopup(content);
-                      },
-                filter:
-                      function(feature,layer){
-                            return (feature.properties.dia <= rangeMax) && (feature.properties.dia >= rangeMin);
                       }
+                      ,
+                // filter:
+                //       function(feature,layer){
+                //             return (feature.properties.dia <= rangeMax) && (feature.properties.dia >= rangeMin);
+                //       }
                                 }).addTo(cluster);
 
                 });
