@@ -192,8 +192,8 @@
 
         <div id="slider" style="top: 0px; right: 1px; margin: 10px 25px;" ></div>
         <div style="margin-right: auto; margin-left: auto; width: 90%; margin-bottom: 10px; text-align: center;">
-            <input type="number" min='1' max='9' id="input-number-min" step= "1" value="1">
-            <input type="number" min='2' max='10' id="input-number-max" step= "1" value ="10">
+            <input type="number" min='2019-1-1' max='2019-10-4' id="input-number-min" step= "1" value="2019-1-2">
+            <input type="number" min='2019-1-2' max='2019-10-5' id="input-number-max" step= "1" value ="2019-10-4">
         </div>
 
         <div class="chat collapse">
@@ -217,6 +217,14 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
+
+
+    document.getElementById('input-number-min').setAttribute("value", 1);
+    document.getElementById('input-number-max').setAttribute("value", 10);
+
+    defaultMin = document.getElementById('input-number-min').value;
+    defaultMax = document.getElementById('input-number-max').value;
+
       var slidervar = document.getElementById('slider');
         noUiSlider.create(slidervar, {
             connect: true,
@@ -227,12 +235,7 @@
                 max: 10
             }
         });
-
-    document.getElementById('input-number-min').setAttribute("value", 1);
-    document.getElementById('input-number-max').setAttribute("value", 10);
-
-    defaultMin = document.getElementById('input-number-min').value;
-    defaultMax = document.getElementById('input-number-max').value;
+    
 
 // iniciamos el mapa por primera vez
       fetch(dataurl)

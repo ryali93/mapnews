@@ -10,6 +10,7 @@ class MapnewsHotspot(models.Model):
     dia = models.IntegerField(null=True)
     tags = models.CharField(max_length=256, default= "tags")
     fecha = models.DateField(null = True, blank= True)
+    lugar = models.CharField(max_length=256, default= "lugar")
     geom = PointField()
 
     def __unicode__(self):

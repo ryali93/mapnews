@@ -1,6 +1,6 @@
 import sqlite3
 # import pandas as pd
-conn = sqlite3.connect('../db.sqlite3')
+# conn = sqlite3.connect('../db.sqlite3')
 
 # a = pd.read_sql('select * from mapnews_mapnewshotspot', conn)
 # print(a)
@@ -16,18 +16,26 @@ conn = sqlite3.connect('../db.sqlite3')
 # a = pd.read_sql('select * from mapnews_mapnewshotspot', conn)
 # print(a)
 
+# cursor = conn.cursor()
+#
+# cursor.execute('select * from mapnews_mapnewshotspot')
+# for u in cursor:
+#     print(u)
+#
+# x=cursor.execute( 'pragma table_info(mapnews_mapnewshotspot)')
+#
+# colnames = x.description
+# for row in x:
+#     print(row)
+# #
+# sql = 'INSERT INTO mapnews_mapnewshotspot(title,description,geom, fecha, tags) VALUES{}'
+# for i in articles:
+#     cursor.execute(sql.format((i[1],str(i[5]),i[7],i[4],i[3])))
+#     cursor.commit()
+# cursor.close()
+
+conn = sqlite3.connect('../db.sqlite3')
 cursor = conn.cursor()
-
-cursor.execute('select * from mapnews_mapnewshotspot')
-for u in cursor:
-    print(u)
-
-x=cursor.execute( 'pragma table_info(mapnews_mapnewshotspot)')
-
-colnames = x.description
-for row in x:
-    print(row)
-
-sql = INSERT INTO mapnews_mapnewshotspot(title,description,end_date) VALUES(art[]
-for art in articles:
-    cursor.execute(' INSERT  ')
+sql= 'DELETE FROM mapnews_mapnewshotspot WHERE dia IS NULL'
+cursor.execute(sql)
+conn.commit()

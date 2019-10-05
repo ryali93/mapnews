@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', TemplateView.as_view(template_name='index1.html'), name='home'),
     # url(r'^data.geojson$', GeoJSONLayerView.as_view(model=MapnewsHotspot, properties=('title', 'description', 'picture_url')), name='data'),
-    url(r'^data.geojson$', GeoJSONLayerView.as_view(model=MapnewsHotspot, properties=('title', 'description','dia')), name='data')
+    url(r'^data.geojson$', GeoJSONLayerView.as_view(model=MapnewsHotspot, properties=('title', 'description','dia','fecha')), name='data')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()
