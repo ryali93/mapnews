@@ -8,6 +8,8 @@ class MapnewsHotspot(models.Model):
     description = models.TextField(max_length=3000)
     # picture = models.ImageField()
     dia = models.IntegerField(null=True)
+    tags = models.CharField(max_length=256, default= "tags")
+    fecha = models.DateField(null = True, blank= True)
     geom = PointField()
 
     def __unicode__(self):
