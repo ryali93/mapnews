@@ -28,19 +28,19 @@
               }
 
           nav, .footer-copyright.text-center {
-                animation: colorchange 20s; /* animation-name followed by duration in seconds*/
+                animation: colorchange 1s; /* animation-name followed by duration in seconds*/
                    /* you could also use milliseconds (ms) or something like 2.5s */
-                -webkit-animation: colorchange 20s; /* Chrome and Safari */
+                -webkit-animation: colorchange 10s; /* Chrome and Safari */
                 animation-iteration-count:infinite;
               }
 
               @keyframes colorchange
               {
-                0%   {background: #657280;}
+                0%   {background: #018571;}
                 /*25%  {background: #74a9cf;}*/
-                50%  {background: #018571;}
+                50%  {background: #1c5ea5;}
                 /*75%  {background: #018571;}*/
-                100% {background: #657280;}
+                100% {background: #018571;}
               }
         
 
@@ -60,6 +60,16 @@
     <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
 
 
+    <script type="text/javascript">
+        function changeClass(){
+            console.log(document.getElementById("lbContainer").className);
+            if (document.getElementById("lbContainer").className == "lbContainer") {
+                document.getElementById("lbContainer").className = "lbContainer active";
+            } else {
+                document.getElementById("lbContainer").className = "lbContainer";
+            };
+        }
+    </script>
 
     <script type="text/javascript">
 
@@ -144,7 +154,9 @@
                         <a id="clear_grids" class="dropdown-item" href="#">Clear Grids</a>
                     </div>
                 </li>
-                <a class="flex-fill text-center text-light nav-link" data-toggle="collapse" href="#" data-target=".chat" id="chatToggle">Analysis</a>
+                <a class="flex-fill text-center text-light nav-link" onclick="changeClass()">Categories</a>
+                <a class="flex-fill text-center text-light nav-link" data-toggle="collapse" href="#" data-target=".chat" id="chatToggle">View News</a>
+                <a class="flex-fill text-center text-light nav-link">Contact Us</a>
                 <a class="flex-fill text-center text-light nav-link" href="https://github.com/geocodery">About</a>
             </ul>
         </div>
@@ -152,8 +164,30 @@
 
 
     <div class="container-fluid d-flex flex-column">
-        <div id="map">
-            {% leaflet_map "main" %}
+        <div style="display: flex;height:100%;">
+
+            <div id="map" class="map">
+                {% leaflet_map "main" %}
+            </div>
+            <div id="lbContainer" class="lbContainer">
+                <div style="padding:20px;">
+                    <h2>Categorías</h2>
+                    <br>
+                    <input type="checkbox" id="cbox1" value="first_checkbox">
+                    <label for="cbox1">Desastres</label>
+                    <br>
+                    <input type="checkbox" id="cbox2" value="second_checkbox">
+                    <label for="cbox2">Corredores</label>
+                    <br>
+                    <input type="checkbox" id="cbox3" value="second_checkbox">
+                    <label for="cbox3">Señor de los milagros</label>
+                    <br>
+                    <input type="checkbox" id="cbox4" value="second_checkbox">
+                    <label for="cbox4">Señor de los milagros</label>
+
+                </div>
+
+            </div>
         </div>
 
         <div id="slider" style="top: 0px; right: 1px; margin: 10px 25px;" ></div>
@@ -284,8 +318,6 @@
                       function(feature,layer){
                             return (feature.properties.dia <= rangeMax) && (feature.properties.dia >= rangeMin);
                       }
-
-
                                 }).addTo(cluster);
 
                 });

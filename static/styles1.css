@@ -44,3 +44,14 @@ body{
 .row {
     margin-right: 0px!important;
 }
+
+.lbContainer{
+    display: none;
+}
+
+.active, .lbContainer:hover {
+    display: flex;
+    width:30%;
+    background-color: white;
+    border-left: 2px solid #657280;
+}
