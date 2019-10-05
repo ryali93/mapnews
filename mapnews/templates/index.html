@@ -99,8 +99,6 @@
     </div>
     </nav>
 
-
-
     <div class="container-fluid cf-active">
         <div class="sbContainer">
             <div class="headWidget">
@@ -120,8 +118,12 @@
             </div>
         </div>
     </div>
-    <div id="map" class="map">
-        {% leaflet_map "main" %}
+
+    <div style="display: flex;">
+        <div style="width: 20%">aaaaaa</div>
+        <div id="map" class="map" style="width: 80%;">
+            {% leaflet_map "main" %}
+        </div>
     </div>
 
 
@@ -131,6 +133,8 @@
     <input type="number" min='1' max='9' id="input-number-min" step ="1">
     <input type="number" min='2' max='10' id="input-number-max" step = "1">
     </div>
+
+
     <script type="text/javascript">
       var slidervar = document.getElementById('slider');
         noUiSlider.create(slidervar, {
